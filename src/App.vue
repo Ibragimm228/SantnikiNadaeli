@@ -28,27 +28,30 @@ const menuItems = [
 const testimonials = [
   {
     id: 1,
-    name: "Sarah Johnson",
-    role: "Property Manager",
-    content: "ACE Systems transformed our building's plumbing infrastructure. Their quantum-level precision and 24/7 monitoring saved us thousands in potential damages.",
+    name: "Michael Schmidt",
+    role: "Outdoor Enthusiast",
+    content: "Der beste Rucksack, den ich je hatte! Die Qualität ist außergewöhnlich und das Design ist perfekt für lange Wanderungen. Sehr empfehlenswert!",
     rating: 5,
-    avatar: "SJ"
+    avatar: "MS",
+    image: "/images/comment-avatar-1.jpg"
   },
   {
     id: 2,
-    name: "Marcus Chen",
-    role: "Restaurant Owner",
-    content: "Emergency response in under 15 minutes! Their cyber-enhanced diagnostic tools identified the issue instantly. Truly next-generation service.",
+    name: "Anna Weber",
+    role: "Travel Blogger",
+    content: "Fantastischer Service und hochwertige Rucksäcke! Die Beratung war ausgezeichnet und ich habe den perfekten Reiserucksack gefunden.",
     rating: 5,
-    avatar: "MC"
+    avatar: "AW",
+    image: "/images/comment-avatar-2.jpg"
   },
   {
     id: 3,
-    name: "Elena Rodriguez",
-    role: "Homeowner",
-    content: "The thermal management system they installed is incredible. Real-time monitoring and predictive maintenance - this is the future of plumbing.",
+    name: "Thomas Müller",
+    role: "Sports Trainer",
+    content: "Robuste Sportrucksäcke mit durchdachten Features. Die Qualität überzeugt auf ganzer Linie. Perfekt für Training und Wettkämpfe.",
     rating: 5,
-    avatar: "ER"
+    avatar: "TM",
+    image: "/images/comment-avatar-3.jpg"
   }
 ]
 
@@ -78,6 +81,15 @@ const navigateToArticle = (article) => {
 
 const routeToLatest = () => {
   router.push('/blog')
+}
+
+// Навигационные функции для кнопок
+const navigateToServices = () => {
+  router.push('/services')
+}
+
+const navigateToContact = () => {
+  router.push('/contact')
 }
 
 const toggleMenu = () => {
@@ -110,6 +122,16 @@ const nextTestimonial = () => {
 
 const prevTestimonial = () => {
   currentTestimonial.value = currentTestimonial.value === 0 ? testimonials.length - 1 : currentTestimonial.value - 1
+}
+
+// Функция для обработки ошибки загрузки изображения
+const handleImageError = (event) => {
+  // Скрываем изображение и показываем fallback с инициалами
+  event.target.style.display = 'none'
+  const fallback = event.target.nextElementSibling
+  if (fallback && fallback.classList.contains('avatar-fallback')) {
+    fallback.style.display = 'flex'
+  }
 }
 
 const spotlightStyle = computed(() => ({
@@ -145,12 +167,12 @@ onUnmounted(() => {
           <router-link to="/" class="brand">
             <div class="brand-symbol">
               <div class="hexagon">
-                <span class="brand-initial">A</span>
+                <span class="brand-initial">R</span>
               </div>
             </div>
             <div class="brand-info">
-              <h1 class="brand-name">ACE</h1>
-              <div class="brand-tagline">NEXT-GEN PLUMBING</div>
+              <h1 class="brand-name">RUCKSACK</h1>
+              <div class="brand-tagline">KAUFEN PREMIUM</div>
             </div>
           </router-link>
         </div>
@@ -174,9 +196,9 @@ onUnmounted(() => {
         </nav>
 
         <div class="header-actions">
-          <button class="emergency-button">
+          <button class="emergency-button" @click="navigateToContact">
             <span class="emergency-pulse"></span>
-            <span>EMERGENCY</span>
+            <span>BERATUNG</span>
           </button>
           
           <button class="menu-trigger" @click="toggleMenu">
@@ -197,24 +219,24 @@ onUnmounted(() => {
       <!-- HERO SECTION WITH ACTION BUTTONS -->
       <section class="hero-section">
         <div class="hero-content">
-          <h1 class="hero-title">NEXT-GENERATION PLUMBING SOLUTIONS</h1>
-          <p class="hero-subtitle">Advanced diagnostics • Real-time monitoring • Quantum precision</p>
+          <h1 class="hero-title">Rucksack kaufen – Online Vergleich – Was ist wichtig</h1>
+          <p class="hero-subtitle">Premium Qualität • Professionelle Beratung • Beste Preise</p>
           
           <div class="hero-actions">
-            <button class="cyber-button primary">
+            <button class="cyber-button primary" @click="navigateToServices">
               <div class="button-glow"></div>
               <div class="button-content">
                 <span class="button-icon">📅</span>
-                <span class="button-text">Schedule Service</span>
+                <span class="button-text">Beratung buchen</span>
                 <div class="button-particles"></div>
               </div>
             </button>
             
-            <button class="cyber-button emergency">
+            <button class="cyber-button emergency" @click="navigateToContact">
               <div class="button-glow emergency-glow"></div>
               <div class="button-content">
                 <span class="button-icon">🚨</span>
-                <span class="button-text">Emergency Call</span>
+                <span class="button-text">Sofort-Beratung</span>
                 <div class="emergency-indicator"></div>
               </div>
             </button>
@@ -225,10 +247,9 @@ onUnmounted(() => {
       <!-- TESTIMONIALS SECTION -->
       <section class="testimonials-section">
         <div class="section-container">
-          <!-- ИЗМЕНЕНИЕ 1: Поменяли порядок и добавили обертку для корректного отображения -->
           <div class="section-header">
-            <h2 class="section-title">What Our Customers Say</h2>
-            <span class="section-tag">CLIENT FEEDBACK</span>
+            <h2 class="section-title">Was unsere Kunden sagen</h2>
+            <span class="section-tag">KUNDENBEWERTUNGEN</span>
             <div class="section-line"></div>
           </div>
 
@@ -246,7 +267,17 @@ onUnmounted(() => {
                   <div class="testimonial-footer">
                     <div class="client-info">
                       <div class="client-avatar">
-                        <span>{{ testimonial.avatar }}</span>
+                        <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
+                        <img 
+                          :src="testimonial.image" 
+                          :alt="testimonial.name"
+                          class="avatar-image"
+                          @error="handleImageError"
+                        >
+                        <!-- FALLBACK С ИНИЦИАЛАМИ -->
+                        <div class="avatar-fallback">
+                          <span>{{ testimonial.avatar }}</span>
+                        </div>
                       </div>
                       <div class="client-details">
                         <h4 class="client-name">{{ testimonial.name }}</h4>
@@ -284,43 +315,43 @@ onUnmounted(() => {
         <div class="cta-container">
           <div class="cta-content">
             <div class="cta-header">
-              <h2 class="cta-title">Need a Plumber?</h2>
-              <p class="cta-subtitle">We're here to help with all your plumbing needs</p>
+              <h2 class="cta-title">Brauchen Sie einen Rucksack?</h2>
+              <p class="cta-subtitle">Wir helfen Ihnen bei der Auswahl des perfekten Rucksacks</p>
             </div>
             
             <div class="cta-stats">
               <div class="stat-item">
-                <span class="stat-number">< 30</span>
-                <span class="stat-label">MIN RESPONSE</span>
+                <span class="stat-number">500+</span>
+                <span class="stat-label">RUCKSÄCKE</span>
               </div>
               <div class="stat-divider"></div>
               <div class="stat-item">
                 <span class="stat-number">24/7</span>
-                <span class="stat-label">AVAILABILITY</span>
+                <span class="stat-label">BERATUNG</span>
               </div>
               <div class="stat-divider"></div>
               <div class="stat-item">
                 <span class="stat-number">100%</span>
-                <span class="stat-label">SATISFACTION</span>
+                <span class="stat-label">ZUFRIEDENHEIT</span>
               </div>
             </div>
             
             <div class="cta-actions">
-              <button class="quantum-button call">
+              <button class="quantum-button call" @click="navigateToContact">
                 <div class="quantum-core"></div>
                 <div class="quantum-rings"></div>
                 <span class="quantum-text">
                   <span class="quantum-icon">📞</span>
-                  Call Now
+                  Anrufen
                 </span>
               </button>
               
-              <button class="quantum-button contact">
+              <button class="quantum-button contact" @click="navigateToContact">
                 <div class="quantum-core"></div>
                 <div class="quantum-rings"></div>
                 <span class="quantum-text">
                   <span class="quantum-icon">💬</span>
-                  Contact Us
+                  Kontakt
                 </span>
               </button>
             </div>
@@ -331,10 +362,9 @@ onUnmounted(() => {
       <!-- LATEST POSTS SECTION - РЕАЛЬНЫЕ ДАННЫЕ ИЗ SUPABASE -->
       <section class="latest-posts">
         <div class="section-container">
-          <!-- ИЗМЕНЕНИЕ 2: Иконка вынесена из h3, чтобы убрать лишние стили градиента -->
           <div class="latest-posts-header">
             <span class="header-icon">📅</span>
-            <h3 class="section-title">Latest Posts</h3>
+            <h3 class="section-title">Neueste Beiträge</h3>
           </div>
           
           <!-- LOADING STATE -->
@@ -343,7 +373,7 @@ onUnmounted(() => {
               <div class="spinner-ring"></div>
               <div class="spinner-core"></div>
             </div>
-            <p class="loading-text">Loading latest posts...</p>
+            <p class="loading-text">Lade neueste Beiträge...</p>
           </div>
           
           <!-- ARTICLES GRID -->
@@ -360,28 +390,28 @@ onUnmounted(() => {
               <div class="post-header">
                 <h4>{{ article.title }}</h4>
                 <div class="post-meta">
-                  <span class="author">by {{ article.author }}</span>
+                  <span class="author">von {{ article.author }}</span>
                   <span class="date">{{ formatDate(article.published_date) }}</span>
                 </div>
               </div>
               <div class="post-content">
                 <p>{{ article.summary }}</p>
               </div>
-              <button class="read-more">Read More →</button>
+              <button class="read-more">Mehr lesen →</button>
             </article>
           </div>
           
           <!-- VIEW ALL BUTTON -->
           <div v-if="!isLoading && articles.length > 0" class="view-all-container">
             <button @click="routeToLatest" class="view-all-button">
-              <span class="view-all-text">VIEW ALL</span>
+              <span class="view-all-text">ALLE ANZEIGEN</span>
               <span class="view-all-arrow">→</span>
             </button>
           </div>
           
           <!-- NO ARTICLES STATE -->
           <div v-else-if="!isLoading && articles.length === 0" class="no-articles">
-            <p class="no-articles-text">No articles found</p>
+            <p class="no-articles-text">Keine Artikel gefunden</p>
           </div>
         </div>
       </section>
@@ -397,20 +427,20 @@ onUnmounted(() => {
         <div class="footer-column">
           <div class="column-header">
             <span class="column-icon">◆</span>
-            <h3>CONNECT</h3>
+            <h3>KONTAKT</h3>
           </div>
           <div class="column-content">
             <div class="data-row">
-              <span class="data-label">LOC</span>
-              <span class="data-value">123 Tech Avenue</span>
+              <span class="data-label">ADR</span>
+              <span class="data-value">Musterstraße 123</span>
             </div>
             <div class="data-row">
               <span class="data-label">TEL</span>
               <span class="data-value">(123) 456-7890</span>
             </div>
             <div class="data-row">
-              <span class="data-label">NET</span>
-              <span class="data-value">ops@ace-tech.io</span>
+              <span class="data-label">WEB</span>
+              <span class="data-value">info@rucksack-kaufen.de</span>
             </div>
           </div>
         </div>
@@ -418,33 +448,33 @@ onUnmounted(() => {
         <div class="footer-column">
           <div class="column-header">
             <span class="column-icon">◆</span>
-            <h3>OPERATIONS</h3>
+            <h3>PRODUKTE</h3>
           </div>
           <div class="column-content">
-            <router-link to="/services" class="operation-link">System Diagnostics</router-link>
-            <router-link to="/services" class="operation-link">Flow Optimization</router-link>
-            <router-link to="/services" class="operation-link">Thermal Management</router-link>
-            <router-link to="/services" class="operation-link">Emergency Protocol</router-link>
+            <router-link to="/services" class="operation-link">Wanderrucksäcke</router-link>
+            <router-link to="/services" class="operation-link">Reiserucksäcke</router-link>
+            <router-link to="/services" class="operation-link">Sportrucksäcke</router-link>
+            <router-link to="/services" class="operation-link">Schulrucksäcke</router-link>
           </div>
         </div>
 
         <div class="footer-column">
           <div class="column-header">
             <span class="column-icon">◆</span>
-            <h3>STATUS</h3>
+            <h3>SERVICE</h3>
           </div>
           <div class="column-content">
             <div class="status-item">
               <span class="status-indicator online"></span>
-              <span>Systems Online</span>
+              <span>Shop Online</span>
             </div>
             <div class="status-item">
               <span class="status-indicator online"></span>
-              <span>24/7 Monitoring Active</span>
+              <span>24/7 Beratung Aktiv</span>
             </div>
             <div class="status-item">
               <span class="status-indicator online"></span>
-              <span>Emergency Response Ready</span>
+              <span>Kostenloser Versand</span>
             </div>
           </div>
         </div>
@@ -453,11 +483,11 @@ onUnmounted(() => {
       <div class="footer-bottom">
         <div class="footer-pattern"></div>
         <div class="footer-info">
-          <span class="copyright">© {{ new Date().getFullYear() }} ACE SYSTEMS</span>
+          <span class="copyright">© {{ new Date().getFullYear() }} RUCKSACK KAUFEN</span>
           <span class="separator">|</span>
-          <router-link to="/privacy" class="footer-link">PRIVACY PROTOCOL</router-link>
+          <router-link to="/privacy" class="footer-link">DATENSCHUTZ</router-link>
           <span class="separator">|</span>
-          <router-link to="/terms" class="footer-link">TERMS OF SERVICE</router-link>
+          <router-link to="/terms" class="footer-link">AGB</router-link>
         </div>
       </div>
     </footer>
@@ -488,8 +518,8 @@ onUnmounted(() => {
                 <span class="info-value">(123) 456-7890</span>
               </div>
               <div class="info-item">
-                <span class="info-label">RESPONSE TIME</span>
-                <span class="info-value">< 30 MIN</span>
+                <span class="info-label">BERATUNG</span>
+                <span class="info-value">KOSTENLOS</span>
               </div>
             </div>
           </div>
@@ -509,7 +539,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* ВСЕ ОСНОВНЫЕ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ - ДОБАВЛЯЕМ ТОЛЬКО НОВЫЕ */
+/* ВСЕ ОСНОВНЫЕ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ */
 .router-content {
   min-height: 50vh;
   position: relative;
@@ -530,6 +560,47 @@ onUnmounted(() => {
   border-color: rgba(99, 102, 241, 0.3);
 }
 
+/* НОВЫЕ СТИЛИ ДЛЯ АВАТАРОК С ИЗОБРАЖЕНИЯМИ */
+.client-avatar {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
+}
+
+.client-avatar:hover {
+  border-color: #6366f1;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.client-avatar:hover .avatar-image {
+  transform: scale(1.1);
+}
+
+.avatar-fallback {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: none; /* Изначально скрыто */
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: white;
+  font-size: 1.2rem;
+}
+
 /* СТИЛИ ДЛЯ ДИНАМИЧЕСКОЙ СЕКЦИИ LATEST POSTS */
 .latest-posts {
   background: linear-gradient(to bottom, transparent, rgba(99, 102, 241, 0.02));
@@ -542,7 +613,6 @@ onUnmounted(() => {
   padding: 5rem 2rem;
 }
 
-/* ИЗМЕНЕНИЕ 2: Новые стили для заголовка с иконкой */
 .latest-posts-header {
   display: flex;
   justify-content: center;
@@ -552,19 +622,17 @@ onUnmounted(() => {
 }
 
 .header-icon {
-  font-size: 2.5rem; /* Размер как у заголовка */
-  line-height: 1; /* Для лучшего выравнивания */
+  font-size: 2.5rem;
+  line-height: 1;
 }
 
 .latest-posts-header .section-title {
-  margin: 0; /* Убираем отступ, так как он теперь у родителя */
+  margin: 0;
 }
-/* Конец изменения 2 */
 
 .latest-posts .section-title {
   font-size: 2.5rem;
   font-weight: 900;
-  /* margin: 0 0 4rem 0;  <-- Убрали, т.к. теперь у .latest-posts-header */
   text-align: center;
   background: linear-gradient(135deg, #e4e4e7, #6366f1);
   -webkit-background-clip: text;
@@ -1030,19 +1098,30 @@ onUnmounted(() => {
   width: 24px;
   height: 20px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .menu-icon span {
-  position: absolute;
   width: 100%;
   height: 2px;
   background: #e4e4e7;
   transition: all 0.3s ease;
+  position: absolute;
 }
 
-.menu-icon span:nth-child(1) { top: 0; }
-.menu-icon span:nth-child(2) { top: 50%; transform: translateY(-50%); }
-.menu-icon span:nth-child(3) { bottom: 0; }
+.menu-icon span:nth-child(1) { 
+  top: 0; 
+}
+.menu-icon span:nth-child(2) { 
+  top: 50%; 
+  transform: translateY(-50%); 
+}
+.menu-icon span:nth-child(3) { 
+  bottom: 0; 
+}
 
 .menu-icon.active span:nth-child(1) {
   top: 50%;
@@ -1198,7 +1277,6 @@ onUnmounted(() => {
 .section-header {
   text-align: center;
   margin-bottom: 4rem;
-  /* ИЗМЕНЕНИЕ 1: Добавлены стили для вертикального расположения элементов */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1220,7 +1298,7 @@ onUnmounted(() => {
 .section-title {
   font-size: 2.5rem;
   font-weight: 900;
-  margin: 0 0 0.5rem 0; /* Изменен margin */
+  margin: 0 0 0.5rem 0;
   background: linear-gradient(135deg, #e4e4e7, #6366f1);
   -webkit-background-clip: text;
   background-clip: text;
@@ -1292,19 +1370,6 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.client-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  color: white;
-  font-size: 1.2rem;
 }
 
 .client-name {
@@ -1928,7 +1993,7 @@ onUnmounted(() => {
   }
   
   .section-title,
-  .latest-posts-header .section-title { /* Обновляем для нового селектора */
+  .latest-posts-header .section-title {
     font-size: 2rem;
   }
   

@@ -1,63 +1,73 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { Phone } from 'lucide-vue-next'
-import emergencyServiceImg from '/images/contact-hero.jpg'
-import waterDamageImg from '/images/water-damage.jpg'
-import pipeRepairImg from '/images/frozen-pipes.jpg'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const servicesVisible = ref(false)
 const mousePosition = ref({ x: 0, y: 0 })
 
 const services = [
   {
-    icon: '🚰',
-    title: 'Emergency Plumbing',
-    description: 'Advanced 24/7 quantum-enhanced emergency response system with AI-powered diagnostics.',
+    icon: '🎒',
+    title: 'Wanderrucksäcke',
+    description: 'Premium Wanderrucksäcke mit fortschrittlicher Ergonomie und innovativen Materialien für ultimativen Komfort.',
     features: [
-      'Burst pipes and water leaks',
-      'Blocked drains and sewers', 
-      'Overflowing toilets',
-      'Gas leaks and repairs',
-      'Hot water system failures'
+      'Wasserdichte Materialien',
+      'Ergonomisches Tragesystem',
+      'Belüfteter Rücken',
+      'Verstellbare Gurte',
+      'Lebenslange Garantie'
     ],
-    image: emergencyServiceImg,
-    gradient: 'linear-gradient(135deg, #ef4444, #f97316)',
-    glowColor: 'rgba(239, 68, 68, 0.3)'
+    image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=300&fit=crop&auto=format&q=80',
+    gradient: 'linear-gradient(135deg, #10b981, #059669)',
+    glowColor: 'rgba(16, 185, 129, 0.3)'
   },
   {
-    icon: '🌊',
-    title: 'Drain Cleaning',
-    description: 'Cyber-enhanced drain cleaning with high-pressure quantum water jetting technology.',
+    icon: '✈️',
+    title: 'Reiserucksäcke',
+    description: 'Intelligente Reiserucksäcke mit optimaler Raumaufteilung und modernen Features für perfekte Reiseerlebnisse.',
     features: [
-      'High-pressure water jetting',
-      'Video camera inspection',
-      'Root removal',
-      'Drain maintenance',
-      'Preventive monitoring'
+      'TSA-konforme Fächer',
+      'Laptop-kompatibel',
+      'Kompressionsriemen',
+      'Diebstahlschutz',
+      'Abnehmbarer Daypack'
     ],
-    image: waterDamageImg,
+    image: 'https://images.unsplash.com/photo-1622260614153-03223fb72052?w=400&h=300&fit=crop&auto=format&q=80',
     gradient: 'linear-gradient(135deg, #06b6d4, #0891b2)',
     glowColor: 'rgba(6, 182, 212, 0.3)'
   },
   {
-    icon: '🔧',
-    title: 'Pipe Repairs',
-    description: 'Next-generation pipe repair using thermal management and precision diagnostics.',
+    icon: '🏃‍♂️',
+    title: 'Sportrucksäcke',
+    description: 'Hochleistungs-Sportrucksäcke mit speziellen Fächern und atmungsaktiven Materialien für aktive Sportler.',
     features: [
-      'Leak detection and repair',
-      'Pipe replacement',
-      'Repiping services',
-      'Frozen pipe repair',
-      'Smart monitoring systems'
+      'Schweißresistente Materialien',
+      'Schuhfach separiert',
+      'Trinksystem kompatibel',
+      'Reflektierende Elemente',
+      'Schnellzugriff-Taschen'
     ],
-    image: pipeRepairImg,
+    image: 'https://images.unsplash.com/photo-1581605405669-fcdf81165afa?w=400&h=300&fit=crop&auto=format&q=80',
     gradient: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
     glowColor: 'rgba(99, 102, 241, 0.3)'
   }
 ]
 
+const navigateToContact = () => {
+  router.push('/contact')
+}
+
 const handleMouseMove = (e) => {
   mousePosition.value = { x: e.clientX, y: e.clientY }
+}
+
+// Функция обработки ошибки загрузки изображения
+const handleImageError = (event) => {
+  console.error('Ошибка загрузки изображения:', event.target.src)
+  // Заменяем на placeholder
+  event.target.src = 'https://via.placeholder.com/400x300/6366f1/ffffff?text=Rucksack'
 }
 
 onMounted(() => {
@@ -79,33 +89,33 @@ onMounted(() => {
       <div class="hero-grid">
         <div class="hero-content">
           <div class="hero-badge">
-            <span class="badge-icon">⚡</span>
-            <span class="badge-text">ADVANCED PLUMBING SOLUTIONS</span>
+            <span class="badge-icon">🎒</span>
+            <span class="badge-text">PREMIUM RUCKSACK KOLLEKTION</span>
           </div>
           
           <h1 class="hero-title">
-            <span class="title-line">NEXT-GENERATION</span>
-            <span class="title-line title-accent">PLUMBING SERVICES</span>
+            <span class="title-line">HOCHWERTIGE</span>
+            <span class="title-line title-accent">RUCKSACK LÖSUNGEN</span>
           </h1>
           
           <p class="hero-subtitle">
-            Quantum-enhanced solutions powered by AI diagnostics and thermal management systems
+            Innovative Rucksäcke mit modernster Technologie und durchdachtem Design für jeden Bedarf
           </p>
           
           <div class="hero-stats">
             <div class="stat-item">
-              <span class="stat-number">24/7</span>
-              <span class="stat-label">EMERGENCY RESPONSE</span>
+              <span class="stat-number">500+</span>
+              <span class="stat-label">RUCKSACK MODELLE</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat-item">
-              <span class="stat-number">< 15</span>
-              <span class="stat-label">MIN ARRIVAL</span>
+              <span class="stat-number">24/7</span>
+              <span class="stat-label">BERATUNG</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat-item">
               <span class="stat-number">100%</span>
-              <span class="stat-label">SATISFACTION</span>
+              <span class="stat-label">ZUFRIEDENHEIT</span>
             </div>
           </div>
         </div>
@@ -122,8 +132,8 @@ onMounted(() => {
       <div class="section-container">
         <!-- ИСПРАВЛЕН ПОРЯДОК И РАСПОЛОЖЕНИЕ -->
         <div class="section-header">
-          <h2 class="section-title">Advanced Service Matrix</h2>
-          <span class="section-tag">OUR CAPABILITIES</span>
+          <h2 class="section-title">Unsere Rucksack Kategorien</h2>
+          <span class="section-tag">PRODUKTSORTIMENT</span>
           <div class="section-line"></div>
         </div>
 
@@ -151,12 +161,17 @@ onMounted(() => {
                 
                 <div class="service-badge">
                   <span class="badge-dot"></span>
-                  <span class="badge-status">ACTIVE</span>
+                  <span class="badge-status">VERFÜGBAR</span>
                 </div>
               </div>
 
               <div class="service-image">
-                <img :src="service.image" :alt="service.title">
+                <img 
+                  :src="service.image" 
+                  :alt="service.title"
+                  @error="handleImageError"
+                  loading="lazy"
+                >
                 <div class="image-overlay" :style="{ background: service.gradient }"></div>
                 <div class="scan-lines"></div>
               </div>
@@ -179,8 +194,8 @@ onMounted(() => {
                 <button class="cyber-service-button" :style="{ 
                   '--button-gradient': service.gradient,
                   '--button-glow': service.glowColor 
-                }">
-                  <span class="button-text">ACTIVATE SERVICE</span>
+                }" @click="navigateToContact">
+                  <span class="button-text">JETZT BERATEN LASSEN</span>
                   <span class="button-arrow">→</span>
                   <div class="button-particles"></div>
                 </button>
@@ -191,7 +206,7 @@ onMounted(() => {
       </div>
     </section>
 
-    <!-- EMERGENCY CTA -->
+    <!-- BERATUNG CTA -->
     <section class="emergency-cta">
       <div class="cta-container">
         <div class="emergency-panel">
@@ -203,23 +218,23 @@ onMounted(() => {
                 <div class="emergency-pulse"></div>
               </div>
               <div class="emergency-info">
-                <h2 class="emergency-title">EMERGENCY PROTOCOL ACTIVE</h2>
-                <p class="emergency-subtitle">Quantum response team ready for immediate deployment</p>
+                <h2 class="emergency-title">KOSTENLOSE BERATUNG AKTIV</h2>
+                <p class="emergency-subtitle">Unser Expertenteam steht für persönliche Rucksack-Beratung bereit</p>
               </div>
             </div>
 
             <div class="emergency-stats">
               <div class="emergency-stat">
-                <span class="stat-value">< 15 MIN</span>
-                <span class="stat-desc">Response Time</span>
+                <span class="stat-value">SOFORT</span>
+                <span class="stat-desc">Beratung</span>
               </div>
               <div class="emergency-stat">
                 <span class="stat-value">24/7</span>
-                <span class="stat-desc">Availability</span>
+                <span class="stat-desc">Erreichbar</span>
               </div>
               <div class="emergency-stat">
-                <span class="stat-value">INSTANT</span>
-                <span class="stat-desc">Connection</span>
+                <span class="stat-value">KOSTENLOS</span>
+                <span class="stat-desc">Service</span>
               </div>
             </div>
 
@@ -228,7 +243,7 @@ onMounted(() => {
                 <div class="emergency-core"></div>
                 <div class="emergency-rings"></div>
                 <span class="emergency-text">
-                  <span class="emergency-label">EMERGENCY HOTLINE</span>
+                  <span class="emergency-label">BERATUNGS-HOTLINE</span>
                   <span class="emergency-number">(123) 456-7890</span>
                 </span>
               </a>
@@ -537,6 +552,7 @@ onMounted(() => {
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 2rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
 }
 
 .service-image img {
@@ -544,6 +560,7 @@ onMounted(() => {
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+  display: block;
 }
 
 .service-card:hover .service-image img {
@@ -690,8 +707,8 @@ onMounted(() => {
 
 .emergency-panel {
   position: relative;
-  background: rgba(239, 68, 68, 0.05);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  background: rgba(99, 102, 241, 0.05);
+  border: 1px solid rgba(99, 102, 241, 0.2);
   border-radius: 20px;
   overflow: hidden;
 }
@@ -699,7 +716,7 @@ onMounted(() => {
 .panel-glow {
   position: absolute;
   inset: -2px;
-  background: linear-gradient(45deg, #ef4444, #f97316);
+  background: linear-gradient(45deg, #6366f1, #8b5cf6);
   filter: blur(20px);
   opacity: 0.2;
   border-radius: 20px;
@@ -721,8 +738,8 @@ onMounted(() => {
   position: relative;
   width: 80px;
   height: 80px;
-  background: rgba(239, 68, 68, 0.1);
-  border: 2px solid rgba(239, 68, 68, 0.3);
+  background: rgba(99, 102, 241, 0.1);
+  border: 2px solid rgba(99, 102, 241, 0.3);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -732,14 +749,14 @@ onMounted(() => {
 .phone-icon {
   width: 32px;
   height: 32px;
-  color: #ef4444;
+  color: #6366f1;
   z-index: 2;
 }
 
 .emergency-pulse {
   position: absolute;
   inset: -5px;
-  border: 2px solid #ef4444;
+  border: 2px solid #6366f1;
   border-radius: 50%;
   animation: emergencyPulse 2s infinite;
 }
@@ -752,7 +769,7 @@ onMounted(() => {
 .emergency-title {
   font-size: 2rem;
   font-weight: 900;
-  color: #ef4444;
+  color: #6366f1;
   margin: 0 0 0.5rem 0;
   letter-spacing: 0.05em;
 }
@@ -779,7 +796,7 @@ onMounted(() => {
   display: block;
   font-size: 1.5rem;
   font-weight: 900;
-  color: #ef4444;
+  color: #6366f1;
   line-height: 1;
   margin-bottom: 0.5rem;
 }
@@ -799,8 +816,8 @@ onMounted(() => {
   position: relative;
   display: inline-block;
   padding: 2rem 3rem;
-  background: rgba(239, 68, 68, 0.1);
-  border: 2px solid rgba(239, 68, 68, 0.3);
+  background: rgba(99, 102, 241, 0.1);
+  border: 2px solid rgba(99, 102, 241, 0.3);
   border-radius: 15px;
   text-decoration: none;
   color: #e4e4e7;
@@ -811,7 +828,7 @@ onMounted(() => {
 .emergency-core {
   position: absolute;
   inset: 0;
-  background: linear-gradient(45deg, #ef4444, #f97316);
+  background: linear-gradient(45deg, #6366f1, #8b5cf6);
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: 15px;
@@ -822,15 +839,15 @@ onMounted(() => {
 }
 
 .quantum-emergency-button:hover {
-  border-color: #ef4444;
+  border-color: #6366f1;
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
 }
 
 .emergency-rings {
   position: absolute;
   inset: -10px;
-  border: 2px solid rgba(239, 68, 68, 0.3);
+  border: 2px solid rgba(99, 102, 241, 0.3);
   border-radius: 20px;
   animation: emergencyRings 3s linear infinite;
 }
@@ -851,7 +868,7 @@ onMounted(() => {
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #ef4444;
+  color: #6366f1;
   margin-bottom: 0.5rem;
 }
 

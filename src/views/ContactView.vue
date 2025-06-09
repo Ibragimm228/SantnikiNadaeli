@@ -10,13 +10,13 @@ const form = ref({
 })
 
 const services = [
-  'Emergency Plumbing',
-  'Repairs & Maintenance',
-  'Bathroom Remodeling',
-  'Drain Cleaning',
-  'Water Heater Services',
-  'Water Treatment',
-  'Other'
+  'Wanderrucksäcke',
+  'Reiserucksäcke', 
+  'Sportrucksäcke',
+  'Schulrucksäcke',
+  'Business Rucksäcke',
+  'Laptop Rucksäcke',
+  'Andere'
 ]
 
 const handleSubmit = (e) => {
@@ -45,25 +45,25 @@ const handleSubmit = (e) => {
       
       <div class="hero-content">
         <div class="hero-badge">
-          <span class="badge-icon">📡</span>
-          <span class="badge-text">CONTACT INTERFACE</span>
+          <span class="badge-icon">🎒</span>
+          <span class="badge-text">KONTAKT PORTAL</span>
         </div>
-        <h1 class="hero-title">Connect With Us</h1>
-        <p class="hero-subtitle">Advanced communication portal • 24/7 support • Instant response protocol</p>
+        <h1 class="hero-title">Kontaktieren Sie uns</h1>
+        <p class="hero-subtitle">Persönliche Rucksack-Beratung • 24/7 Support • Sofortige Antwort</p>
         <div class="hero-stats">
           <div class="stat-item">
             <span class="stat-value">24/7</span>
-            <span class="stat-label">AVAILABILITY</span>
+            <span class="stat-label">VERFÜGBAR</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
             <span class="stat-value">&lt;15min</span>
-            <span class="stat-label">RESPONSE TIME</span>
+            <span class="stat-label">ANTWORTZEIT</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
             <span class="stat-value">100%</span>
-            <span class="stat-label">SATISFACTION</span>
+            <span class="stat-label">ZUFRIEDENHEIT</span>
           </div>
         </div>
       </div>
@@ -78,9 +78,9 @@ const handleSubmit = (e) => {
             <div class="form-header">
               <div class="form-badge">
                 <span class="form-icon">⚡</span>
-                <span class="form-tag">SECURE TRANSMISSION</span>
+                <span class="form-tag">SICHERE ÜBERTRAGUNG</span>
               </div>
-              <h2 class="form-title">Send Encrypted Message</h2>
+              <h2 class="form-title">Beratungsanfrage senden</h2>
               <div class="form-line"></div>
             </div>
 
@@ -89,7 +89,7 @@ const handleSubmit = (e) => {
               <div class="quantum-field">
                 <label for="name" class="field-label">
                   <span class="label-icon">👤</span>
-                  <span class="label-text">FULL NAME</span>
+                  <span class="label-text">VOLLSTÄNDIGER NAME</span>
                 </label>
                 <div class="input-container">
                   <input 
@@ -97,7 +97,7 @@ const handleSubmit = (e) => {
                     id="name" 
                     v-model="form.name" 
                     required
-                    placeholder="Enter your full name"
+                    placeholder="Geben Sie Ihren vollständigen Namen ein"
                     class="quantum-input"
                   />
                   <div class="input-glow"></div>
@@ -109,7 +109,7 @@ const handleSubmit = (e) => {
               <div class="quantum-field">
                 <label for="email" class="field-label">
                   <span class="label-icon">📧</span>
-                  <span class="label-text">EMAIL ADDRESS</span>
+                  <span class="label-text">E-MAIL ADRESSE</span>
                 </label>
                 <div class="input-container">
                   <input 
@@ -117,7 +117,7 @@ const handleSubmit = (e) => {
                     id="email" 
                     v-model="form.email" 
                     required
-                    placeholder="Enter your email address"
+                    placeholder="Geben Sie Ihre E-Mail Adresse ein"
                     class="quantum-input"
                   />
                   <div class="input-glow"></div>
@@ -129,7 +129,7 @@ const handleSubmit = (e) => {
               <div class="quantum-field">
                 <label for="phone" class="field-label">
                   <span class="label-icon">📱</span>
-                  <span class="label-text">PHONE NUMBER</span>
+                  <span class="label-text">TELEFONNUMMER</span>
                 </label>
                 <div class="input-container">
                   <input 
@@ -137,7 +137,7 @@ const handleSubmit = (e) => {
                     id="phone" 
                     v-model="form.phone" 
                     required
-                    placeholder="Enter your phone number"
+                    placeholder="Geben Sie Ihre Telefonnummer ein"
                     class="quantum-input"
                   />
                   <div class="input-glow"></div>
@@ -148,12 +148,12 @@ const handleSubmit = (e) => {
               <!-- SERVICE FIELD -->
               <div class="quantum-field">
                 <label for="service" class="field-label">
-                  <span class="label-icon">🔧</span>
-                  <span class="label-text">SERVICE PROTOCOL</span>
+                  <span class="label-icon">🎒</span>
+                  <span class="label-text">RUCKSACK KATEGORIE</span>
                 </label>
                 <div class="select-container">
                   <select id="service" v-model="form.service" required class="quantum-select">
-                    <option value="">Select a service</option>
+                    <option value="">Wählen Sie eine Kategorie</option>
                     <option v-for="service in services" :key="service" :value="service">
                       {{ service }}
                     </option>
@@ -168,7 +168,7 @@ const handleSubmit = (e) => {
               <div class="quantum-field">
                 <label for="message" class="field-label">
                   <span class="label-icon">💬</span>
-                  <span class="label-text">MESSAGE DATA</span>
+                  <span class="label-text">IHRE NACHRICHT</span>
                 </label>
                 <div class="textarea-container">
                   <textarea 
@@ -176,7 +176,7 @@ const handleSubmit = (e) => {
                     v-model="form.message" 
                     rows="5"
                     required
-                    placeholder="Tell us about your plumbing needs"
+                    placeholder="Erzählen Sie uns von Ihren Rucksack-Wünschen und Anforderungen"
                     class="quantum-textarea"
                   ></textarea>
                   <div class="input-glow"></div>
@@ -190,7 +190,7 @@ const handleSubmit = (e) => {
                 <div class="submit-rings"></div>
                 <div class="submit-content">
                   <span class="submit-icon">🚀</span>
-                  <span class="submit-text">TRANSMIT MESSAGE</span>
+                  <span class="submit-text">ANFRAGE SENDEN</span>
                   <span class="submit-arrow">→</span>
                 </div>
                 <div class="submit-particles"></div>
@@ -205,17 +205,17 @@ const handleSubmit = (e) => {
               <div class="card-glow"></div>
               <div class="card-header">
                 <div class="card-icon emergency-icon">🚨</div>
-                <h3 class="card-title">Emergency Protocol</h3>
+                <h3 class="card-title">Sofort-Beratung</h3>
                 <div class="card-status">
                   <div class="status-dot active"></div>
-                  <span class="status-text">ACTIVE 24/7</span>
+                  <span class="status-text">AKTIV 24/7</span>
                 </div>
               </div>
               <div class="card-content">
-                <p class="card-description">Immediate response for critical plumbing emergencies</p>
-                <a href="tel:+1234567890" class="quantum-link emergency-link">
+                <p class="card-description">Sofortige Rucksack-Beratung für dringende Anfragen</p>
+                <a href="tel:+4912345678900" class="quantum-link emergency-link">
                   <span class="link-icon">📞</span>
-                  <span class="link-text">(123) 456-7890</span>
+                  <span class="link-text">+49 (123) 456-7890</span>
                   <div class="link-pulse"></div>
                 </a>
               </div>
@@ -227,22 +227,22 @@ const handleSubmit = (e) => {
               <div class="card-glow"></div>
               <div class="card-header">
                 <div class="card-icon">⏰</div>
-                <h3 class="card-title">Operation Hours</h3>
-                <div class="card-badge">SCHEDULED</div>
+                <h3 class="card-title">Öffnungszeiten</h3>
+                <div class="card-badge">GESCHÄFTSZEITEN</div>
               </div>
               <div class="card-content">
                 <div class="hours-grid">
                   <div class="hour-item">
-                    <span class="hour-day">MON - FRI</span>
-                    <span class="hour-time">8am - 6pm</span>
+                    <span class="hour-day">MO - FR</span>
+                    <span class="hour-time">9:00 - 18:00</span>
                   </div>
                   <div class="hour-item">
-                    <span class="hour-day">SATURDAY</span>
-                    <span class="hour-time">9am - 4pm</span>
+                    <span class="hour-day">SAMSTAG</span>
+                    <span class="hour-time">10:00 - 16:00</span>
                   </div>
                   <div class="hour-item">
-                    <span class="hour-day">SUNDAY</span>
-                    <span class="hour-time">Emergency Only</span>
+                    <span class="hour-day">SONNTAG</span>
+                    <span class="hour-time">Nur Notfälle</span>
                   </div>
                 </div>
               </div>
@@ -254,17 +254,17 @@ const handleSubmit = (e) => {
               <div class="card-glow"></div>
               <div class="card-header">
                 <div class="card-icon">🏢</div>
-                <h3 class="card-title">Base Location</h3>
-                <div class="card-badge">PRIMARY</div>
+                <h3 class="card-title">Standort</h3>
+                <div class="card-badge">HAUPTSITZ</div>
               </div>
               <div class="card-content">
                 <div class="location-info">
-                  <p class="location-address">123 Plumbing Street</p>
-                  <p class="location-city">San Francisco, CA 94105</p>
+                  <p class="location-address">Rucksackstraße 123</p>
+                  <p class="location-city">München, Bayern 80331</p>
                 </div>
                 <a href="https://maps.google.com" target="_blank" class="quantum-link">
                   <span class="link-icon">📍</span>
-                  <span class="link-text">Get Directions</span>
+                  <span class="link-text">Route anzeigen</span>
                   <div class="link-pulse"></div>
                 </a>
               </div>
@@ -276,14 +276,14 @@ const handleSubmit = (e) => {
               <div class="card-glow"></div>
               <div class="card-header">
                 <div class="card-icon">📨</div>
-                <h3 class="card-title">Digital Mail</h3>
-                <div class="card-badge">SECURE</div>
+                <h3 class="card-title">E-Mail Kontakt</h3>
+                <div class="card-badge">SICHER</div>
               </div>
               <div class="card-content">
-                <p class="card-description">For non-urgent technical inquiries</p>
-                <a href="mailto:info@aceplumbing.com" class="quantum-link">
+                <p class="card-description">Für detaillierte Rucksack-Anfragen und Informationen</p>
+                <a href="mailto:info@rucksack-kaufen.de" class="quantum-link">
                   <span class="link-icon">✉️</span>
-                  <span class="link-text">info@aceplumbing.com</span>
+                  <span class="link-text">info@rucksack-kaufen.de</span>
                   <div class="link-pulse"></div>
                 </a>
               </div>
@@ -300,9 +300,9 @@ const handleSubmit = (e) => {
         <div class="map-header">
           <div class="map-badge">
             <span class="map-icon">🗺️</span>
-            <span class="map-text">LOCATION SCANNER</span>
+            <span class="map-text">STANDORT SCANNER</span>
           </div>
-          <h2 class="map-title">Find Our Command Center</h2>
+          <h2 class="map-title">Finden Sie unser Rucksack-Center</h2>
           <div class="map-line"></div>
         </div>
         
@@ -318,8 +318,8 @@ const handleSubmit = (e) => {
                   </div>
                 </div>
                 <div class="map-info">
-                  <span class="map-status">🔍 SCANNING LOCATION...</span>
-                  <span class="map-coords">37.7749° N, 122.4194° W</span>
+                  <span class="map-status">🔍 STANDORT SCANNEN...</span>
+                  <span class="map-coords">48.1351° N, 11.5820° E</span>
                 </div>
               </div>
             </div>
@@ -1234,7 +1234,7 @@ const handleSubmit = (e) => {
     height: 400px;
   }
   
-  .radar-circle {
+  .map-radar {
     width: 150px;
     height: 150px;
   }
@@ -1280,7 +1280,7 @@ const handleSubmit = (e) => {
     height: 300px;
   }
   
-  .radar-circle {
+  .map-radar {
     width: 120px;
     height: 120px;
   }

@@ -1,62 +1,69 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const mousePosition = ref({ x: 0, y: 0 })
 
 const stats = [
-  { number: '25+', label: 'Years Experience', icon: '⚡' },
-  { number: '10K+', label: 'Happy Customers', icon: '👥' },
-  { number: '24/7', label: 'Emergency Service', icon: '🚨' },
-  { number: '100%', label: 'Satisfaction Rate', icon: '✨' }
+  { number: '10+', label: 'Jahre Erfahrung', icon: '⚡' },
+  { number: '5K+', label: 'Zufriedene Kunden', icon: '👥' },
+  { number: '24/7', label: 'Beratungsservice', icon: '🚨' },
+  { number: '500+', label: 'Rucksack Modelle', icon: '🎒' }
 ]
 
 const team = [
   {
-    name: 'John Smith',
-    role: 'Master Plumber',
-    code: 'MSTR-001',
-    description: '25+ years of experience in residential and commercial plumbing.',
-    avatar: 'JS',
-    level: 'QUANTUM',
+    name: 'Klaus Weber',
+    role: 'Geschäftsführer',
+    code: 'CEO-001',
+    description: '15+ Jahre Erfahrung im Outdoor- und Reiseausrüstungsbereich.',
+    avatar: 'KW',
+    level: 'EXPERT',
     image: '/images/team-member-1.jpg'
   },
   {
-    name: 'Mike Johnson',
-    role: 'Service Manager',
-    code: 'SVCM-002',
-    description: 'Ensures top-quality service delivery and customer satisfaction.',
-    avatar: 'MJ',
-    level: 'ELITE',
+    name: 'Anna Schmidt',
+    role: 'Produktberaterin',
+    code: 'PRD-002',
+    description: 'Spezialistin für Wanderrucksäcke und Outdoor-Ausrüstung.',
+    avatar: 'AS',
+    level: 'PRO',
     image: '/images/team-member-2.jpg'
   },
   {
-    name: 'Sarah Wilson',
-    role: 'Customer Service',
-    code: 'CUST-003',
-    description: 'Your first point of contact for scheduling and support.',
-    avatar: 'SW',
-    level: 'PRO',
+    name: 'Michael Müller',
+    role: 'Kundenservice',
+    code: 'SVC-003',
+    description: 'Ihr erster Ansprechpartner für Beratung und Support.',
+    avatar: 'MM',
+    level: 'ELITE',
     image: '/images/team-member-3.jpg'
   },
   {
-    name: 'David Brown',
-    role: 'Senior Technician',
-    code: 'TECH-004',
-    description: 'Specializes in complex installations and repairs.',
-    avatar: 'DB',
-    level: 'EXPERT',
+    name: 'Sarah Hoffmann',
+    role: 'Reise-Expertin',
+    code: 'TRV-004',
+    description: 'Spezialisiert auf Reiserucksäcke und Travel-Gear.',
+    avatar: 'SH',
+    level: 'QUANTUM',
     image: '/images/team-member-4.jpg'
   }
 ]
 
 const certifications = [
-  { name: 'Licensed Master Plumber', code: 'LMP-2024', status: 'ACTIVE' },
-  { name: 'Certified Green Plumber', code: 'CGP-2024', status: 'ACTIVE' },
-  { name: 'EPA Certified', code: 'EPA-2024', status: 'ACTIVE' },
-  { name: 'BBB Accredited Business', code: 'BBB-A+', status: 'VERIFIED' },
-  { name: 'Certified Backflow Tester', code: 'CBT-2024', status: 'ACTIVE' },
-  { name: 'OSHA Safety Certified', code: 'OSH-2024', status: 'ACTIVE' }
+  { name: 'Autorisierter Händler', code: 'AH-2024', status: 'AKTIV' },
+  { name: 'Outdoor Industry Zertifiziert', code: 'OIC-2024', status: 'AKTIV' },
+  { name: 'ISO 9001 Qualitätsmanagement', code: 'ISO-2024', status: 'AKTIV' },
+  { name: 'Trusted Shops Siegel', code: 'TS-A+', status: 'VERIFIZIERT' },
+  { name: 'TÜV Geprüfter Online-Shop', code: 'TÜV-2024', status: 'AKTIV' },
+  { name: 'Nachhaltiges Handeln Zertifikat', code: 'NH-2024', status: 'AKTIV' }
 ]
+
+// Navigation functions
+const navigateToContact = () => {
+  router.push('/contact')
+}
 
 const handleMouseMove = (e) => {
   mousePosition.value = { x: e.clientX, y: e.clientY }
@@ -65,6 +72,13 @@ const handleMouseMove = (e) => {
 const spotlightStyle = computed(() => ({
   background: `radial-gradient(300px at ${mousePosition.value.x}px ${mousePosition.value.y}px, rgba(99, 102, 241, 0.06), transparent 60%)`
 }))
+
+// Image error handler
+const handleImageError = (event) => {
+  console.error('Fehler beim Laden des Bildes:', event.target.src)
+  // Fallback zu placeholder
+  event.target.src = 'https://via.placeholder.com/400x600/6366f1/ffffff?text=Team'
+}
 
 onMounted(() => {
   window.addEventListener('mousemove', handleMouseMove)
@@ -85,15 +99,15 @@ onUnmounted(() => {
       <div class="container">
         <div class="hero-content">
           <div class="hero-badge">
-            <span class="badge-icon">◆</span>
-            <span class="badge-text">ABOUT ACE SYSTEMS</span>
+            <span class="badge-icon">🎒</span>
+            <span class="badge-text">ÜBER RUCKSACK KAUFEN</span>
           </div>
-          <h1 class="hero-title">NEXT-GENERATION PLUMBING SOLUTIONS</h1>
-          <p class="hero-subtitle">Advanced technology meets traditional craftsmanship since 1998</p>
+          <h1 class="hero-title">PREMIUM RUCKSACK LÖSUNGEN</h1>
+          <p class="hero-subtitle">Qualität trifft Innovation seit 2014</p>
           <div class="hero-stats">
             <div class="stat-pulse">
               <span class="pulse-dot"></span>
-              <span class="pulse-text">OPERATIONAL SINCE 1998</span>
+              <span class="pulse-text">GEGRÜNDET 2014</span>
             </div>
           </div>
         </div>
@@ -106,23 +120,23 @@ onUnmounted(() => {
         <div class="story-content">
           <div class="story-text">
             <div class="section-header">
-              <h2 class="section-title">Our Evolution</h2>
+              <h2 class="section-title">Unsere Geschichte</h2>
               <div class="section-line"></div>
-              <span class="section-tag">ORIGIN PROTOCOL</span>
+              <span class="section-tag">FIRMENHISTORIE</span>
             </div>
             
             <div class="story-blocks">
               <div class="story-block">
                 <div class="block-number">01</div>
                 <div class="block-content">
-                  <p>For over 25 years, ACE Systems has evolved from traditional plumbing into a cutting-edge technological operation, serving San Francisco and surrounding regions with quantum-level precision.</p>
+                  <p>Seit über 10 Jahren hat sich Rucksack Kaufen von einem kleinen Online-Shop zu Deutschlands führendem Rucksack-Spezialisten entwickelt und bedient Kunden in ganz Europa mit höchster Qualität und Präzision.</p>
                 </div>
               </div>
               
               <div class="story-block">
                 <div class="block-number">02</div>
                 <div class="block-content">
-                  <p>Our commitment to innovation, integrity, and system optimization has established us as the premier choice for both predictive maintenance protocols and emergency response operations.</p>
+                  <p>Unser Engagement für Innovation, Qualität und erstklassige Beratung hat uns als die erste Wahl für Outdoor-Enthusiasten, Reisende und Sportler etabliert.</p>
                 </div>
               </div>
             </div>
@@ -135,17 +149,17 @@ onUnmounted(() => {
                 <div class="hologram-ring"></div>
                 <div class="hologram-ring"></div>
                 <div class="hologram-core">
-                  <span class="core-symbol">⚡</span>
+                  <span class="core-symbol">🎒</span>
                 </div>
               </div>
               <div class="visual-data">
                 <div class="data-stream">
-                  <span class="stream-label">UPTIME</span>
-                  <span class="stream-value">99.9%</span>
+                  <span class="stream-label">QUALITÄT</span>
+                  <span class="stream-value">100%</span>
                 </div>
                 <div class="data-stream">
-                  <span class="stream-label">RESPONSE</span>
-                  <span class="stream-value">&lt;30MIN</span>
+                  <span class="stream-label">LIEFERZEIT</span>
+                  <span class="stream-value">&lt;24H</span>
                 </div>
               </div>
             </div>
@@ -173,16 +187,22 @@ onUnmounted(() => {
     <section class="team-section">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Elite Team Members</h2>
+          <h2 class="section-title">Unser Expertenteam</h2>
           <div class="section-line"></div>
-          <span class="section-tag">OPERATIVE ROSTER</span>
+          <span class="section-tag">TEAM ÜBERSICHT</span>
         </div>
         
         <div class="team-grid">
           <div v-for="member in team" :key="member.name" class="team-card">
             <div class="member-image-container">
               <div class="member-image-wrapper">
-                <img :src="member.image" :alt="member.name" class="member-image">
+                <img 
+                  :src="member.image" 
+                  :alt="member.name" 
+                  class="member-image"
+                  @error="handleImageError"
+                  loading="lazy"
+                >
               </div>
               <div class="image-overlay"></div>
               <div class="level-badge" :class="member.level.toLowerCase()">
@@ -204,7 +224,7 @@ onUnmounted(() => {
               <div class="card-footer">
                 <div class="status-indicator">
                   <span class="status-dot active"></span>
-                  <span class="status-text">ACTIVE</span>
+                  <span class="status-text">VERFÜGBAR</span>
                 </div>
               </div>
             </div>
@@ -217,9 +237,9 @@ onUnmounted(() => {
     <section class="certifications-section">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">System Certifications</h2>
+          <h2 class="section-title">Zertifizierungen & Auszeichnungen</h2>
           <div class="section-line"></div>
-          <span class="section-tag">SECURITY CLEARANCE</span>
+          <span class="section-tag">QUALITÄTSSTANDARDS</span>
         </div>
         
         <div class="certifications-grid">
@@ -245,25 +265,25 @@ onUnmounted(() => {
       <div class="cta-background"></div>
       <div class="container">
         <div class="cta-content">
-          <h2 class="cta-title">Initialize Contact Protocol</h2>
-          <p class="cta-subtitle">Ready to experience next-generation plumbing solutions?</p>
+          <h2 class="cta-title">Bereit für Ihren perfekten Rucksack?</h2>
+          <p class="cta-subtitle">Lassen Sie sich von unseren Experten beraten!</p>
           
           <div class="cta-actions">
-            <button class="quantum-button emergency">
+            <button class="quantum-button emergency" @click="navigateToContact">
               <div class="quantum-core"></div>
               <div class="quantum-rings"></div>
               <span class="quantum-text">
                 <span class="quantum-icon">📞</span>
-                EMERGENCY
+                ANRUFEN
               </span>
             </button>
             
-            <button class="quantum-button contact">
+            <button class="quantum-button contact" @click="navigateToContact">
               <div class="quantum-core"></div>
               <div class="quantum-rings"></div>
               <span class="quantum-text">
                 <span class="quantum-icon">💬</span>
-                CONTACT
+                KONTAKT
               </span>
             </button>
           </div>
@@ -642,7 +662,7 @@ onUnmounted(() => {
   z-index: -1;
 }
 
-/* TEAM SECTION - ИСПРАВЛЕННЫЕ СТИЛИ ПО ОБРАЗЦУ КАРТИНКИ */
+/* TEAM SECTION */
 .team-section {
   padding: 8rem 0;
 }
@@ -672,14 +692,13 @@ onUnmounted(() => {
   box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
 }
 
-/* ИСПРАВЛЕННЫЕ СТИЛИ ДЛЯ ПОРТРЕТНЫХ ИЗОБРАЖЕНИЙ */
 .member-image-container {
   position: relative;
   width: 100%;
-  height: 300px; /* ОПТИМАЛЬНАЯ ВЫСОТА ДЛЯ ПОРТРЕТА */
+  height: 300px;
   overflow: hidden;
   border-radius: 20px 20px 0 0;
-  background: #f8f9fa; /* СВЕТЛЫЙ ФОН КАК НА КАРТИНКЕ */
+  background: #f8f9fa;
 }
 
 .member-image-wrapper {
@@ -694,10 +713,11 @@ onUnmounted(() => {
 .member-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* ЗАПОЛНЯЕТ ВЕСЬ КОНТЕЙНЕР */
-  object-position: center 15%; /* ПОКАЗЫВАЕТ ОТ ГОЛОВЫ ДО ГРУДИ */
+  object-fit: cover;
+  object-position: center 15%;
   transition: transform 0.3s ease;
   background: transparent;
+  display: block;
 }
 
 .team-card:hover .member-image {
@@ -890,13 +910,13 @@ onUnmounted(() => {
   border: 1px solid;
 }
 
-.cert-status.active {
+.cert-status.aktiv {
   background: rgba(16, 185, 129, 0.2);
   border-color: #10b981;
   color: #10b981;
 }
 
-.cert-status.verified {
+.cert-status.verifiziert {
   background: rgba(99, 102, 241, 0.2);
   border-color: #6366f1;
   color: #6366f1;
