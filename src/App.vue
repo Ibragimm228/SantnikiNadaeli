@@ -177,24 +177,6 @@ onUnmounted(() => {
           </router-link>
         </div>
 
-        <nav class="desktop-navigation">
-          <div class="nav-track">
-            <router-link 
-              v-for="(item, index) in menuItems" 
-              :key="item.name"
-              :to="item.link" 
-              class="nav-node"
-              :class="{ active: route.path === item.link }"
-              @mouseenter="activeSection = index"
-              @mouseleave="activeSection = -1"
-            >
-              <span class="node-number">{{ item.icon }}</span>
-              <span class="node-label">{{ item.name }}</span>
-              <div class="node-glow" :class="{ active: activeSection === index || route.path === item.link }"></div>
-            </router-link>
-          </div>
-        </nav>
-
         <div class="header-actions">
           <button class="emergency-button" @click="navigateToContact">
             <span class="emergency-pulse"></span>
@@ -448,13 +430,14 @@ onUnmounted(() => {
         <div class="footer-column">
           <div class="column-header">
             <span class="column-icon">◆</span>
-            <h3>PRODUKTE</h3>
+            <h3>NAVIGATION</h3>
           </div>
           <div class="column-content">
-            <router-link to="/services" class="operation-link">Wanderrucksäcke</router-link>
-            <router-link to="/services" class="operation-link">Reiserucksäcke</router-link>
-            <router-link to="/services" class="operation-link">Sportrucksäcke</router-link>
-            <router-link to="/services" class="operation-link">Schulrucksäcke</router-link>
+            <router-link to="/" class="operation-link">Home</router-link>
+            <router-link to="/services" class="operation-link">Services</router-link>
+            <router-link to="/about" class="operation-link">About</router-link>
+            <router-link to="/blog" class="operation-link">Blog</router-link>
+            <router-link to="/contact" class="operation-link">Contact</router-link>
           </div>
         </div>
 
@@ -485,7 +468,7 @@ onUnmounted(() => {
         <div class="footer-info">
           <span class="copyright">© {{ new Date().getFullYear() }} RUCKSACK KAUFEN</span>
           <span class="separator">|</span>
-          <router-link to="/privacy" class="footer-link">DATENSCHUTZ</router-link>
+          <router-link to="/privacy-policy" class="footer-link">DATENSCHUTZ</router-link>
           <span class="separator">|</span>
           <router-link to="/terms" class="footer-link">AGB</router-link>
         </div>
@@ -539,7 +522,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* ВСЕ ОСНОВНЫЕ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ */
+/* ВСЕ ОСНОВНЫЕ СТИЛИ */
 .router-content {
   min-height: 50vh;
   position: relative;
@@ -547,11 +530,6 @@ onUnmounted(() => {
 
 .router-content.is-home {
   display: none;
-}
-
-.nav-node.active {
-  color: white;
-  background: rgba(99, 102, 241, 0.2);
 }
 
 .menu-item.active {
@@ -881,7 +859,7 @@ onUnmounted(() => {
   margin: 0;
 }
 
-/* ВСЕ ОСТАЛЬНЫЕ СТИЛИ БЕЗ ИЗМЕНЕНИЙ */
+/* ВСЕ ОСТАЛЬНЫЕ СТИЛИ */
 * {
   box-sizing: border-box;
 }
@@ -919,7 +897,7 @@ onUnmounted(() => {
   margin: 0 auto;
   padding: 1.5rem 2rem;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 3rem;
 }
@@ -973,64 +951,6 @@ onUnmounted(() => {
   letter-spacing: 0.3em;
   color: #6366f1;
   font-weight: 500;
-}
-
-/* NAVIGATION */
-.desktop-navigation {
-  display: flex;
-  justify-content: center;
-}
-
-.nav-track {
-  display: flex;
-  gap: 1rem;
-  padding: 0.5rem;
-  background: rgba(99, 102, 241, 0.05);
-  border-radius: 50px;
-  border: 1px solid rgba(99, 102, 241, 0.1);
-}
-
-.nav-node {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  color: #a1a1aa;
-  border-radius: 50px;
-  transition: all 0.3s ease;
-}
-
-.nav-node:hover {
-  color: white;
-  background: rgba(99, 102, 241, 0.1);
-}
-
-.node-number {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #6366f1;
-}
-
-.node-label {
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.node-glow {
-  position: absolute;
-  inset: -2px;
-  border-radius: 50px;
-  opacity: 0;
-  background: linear-gradient(45deg, #6366f1, #8b5cf6);
-  filter: blur(10px);
-  transition: opacity 0.3s ease;
-  z-index: -1;
-}
-
-.node-glow.active {
-  opacity: 0.5;
 }
 
 /* HEADER ACTIONS */
@@ -1904,14 +1824,6 @@ onUnmounted(() => {
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
-  .desktop-navigation {
-    display: none;
-  }
-  
-  .header-grid {
-    grid-template-columns: 1fr auto;
-  }
-  
   .emergency-button {
     display: none;
   }
